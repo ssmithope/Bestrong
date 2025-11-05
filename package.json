@@ -1,0 +1,26 @@
+{
+  "name": "bestrong",
+  "version": "1.0.0",
+  "description": "Project-Team\r # This project is part of the WDD430 and focuses on building a full-stack web application collaboratively.\r The goal is to develop both technical and teamwork skills in a professional development environment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssmithope/Bestrong.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ssmithope/Bestrong/issues"
+  },
+  "homepage": "https://github.com/ssmithope/Bestrong#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.3"
+  }
+}
