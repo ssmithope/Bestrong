@@ -8,4 +8,4 @@ The goal is to develop both technical and teamwork skills in a professional deve
 - Ryndee van Langeveld
 - Dylan Winters
 - Smith Eutrope Zephirin
-
+- Marcos Murilo Campos dos Santos
