@@ -1,11 +1,5 @@
-# Bestrong
-Project-Team
-# This project is part of the WDD430 and focuses on building a full-stack web application collaboratively.
-The goal is to develop both technical and teamwork skills in a professional development environment.
+## Next.js App Router Course - Starter
 
-# Group Members
-- Daniel Cordeiro Faria
-- Ryndee van Langeveld
-- Dylan Winters
-- Smith Eutrope Zephirin
-- Marcos Murilo Campos dos Santos
+This is the starter template for the Next.js App Router Course. It contains the starting code for the dashboard application.
+
+For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
