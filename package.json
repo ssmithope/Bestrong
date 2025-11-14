@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "pnpm db:push && next build",
+    "build": "next build",
     "db:push": "node scripts/seed.js",
     "start": "next start",
     "dev": "next dev --turbopack",
