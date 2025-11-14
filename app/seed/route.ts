@@ -4,17 +4,10 @@ import fs from 'fs';
 import path from 'path';
 
 export async function GET() {
-  if (process.env.NODE_ENV === 'production') {
-    return NextResponse.json(
-      { error: 'This route is not available in production.' },
-      { status: 403 }
-    );
-  }
-
   const pool = new Pool({
     connectionString: process.env.POSTGRES_URL,
     ssl: {
-      rejectUnauthorized: false,
+      rejectUnauthorized: false, // Necessário para Vercel Postgres
     },
   });
 
