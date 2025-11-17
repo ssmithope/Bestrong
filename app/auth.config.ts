@@ -5,18 +5,11 @@ export const authConfig = {
     signIn: '/login',
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
+    authorized({ auth }) {
       const isLoggedIn = !!auth?.user;
-      const isPublicRoute =
-        ['/', '/login', '/register'].includes(nextUrl.pathname) ||
-        nextUrl.pathname.startsWith('/_next/') ||
-        nextUrl.pathname.endsWith('.png'); // Adicione outras extensões se necessário
-
-      if (isPublicRoute) {
-        return true; // Always allow access to public routes
-      }
-
-      return isLoggedIn; // For all other routes, user must be logged in
+      // As rotas protegidas são definidas pelo `matcher` no middleware.ts.
+      // Se a rota não estiver no matcher, esta função não é chamada.
+      return isLoggedIn;
     },
   },
   providers: [], // We will add providers like Credentials here later
