@@ -28,15 +28,15 @@ const Header = () => {
                 0
               </span>
             </button>
-            <button aria-label="Account">
+            <Link href="/login" aria-label="Account">
               <User className="h-6 w-6 text-text-main" />
-            </button>
+            </Link>
           </div>
         </div>
         <nav className="mt-4 flex justify-center gap-10">
-          <a href="#" className="border-b-2 border-text-main pb-1 font-semibold text-text-main">Explore</a>
+          {/* <a href="#" className="border-b-2 border-text-main pb-1 font-semibold text-text-main">Explore</a>
           <a href="#" className="text-secondary hover:text-text-main">Sell</a>
-          <a href="#" className="text-secondary hover:text-text-main">Community</a>
+          <a href="#" className="text-secondary hover:text-text-main">Community</a> */}
         </nav>
       </div>
     </header>
