@@ -1,6 +1,8 @@
 'use server';
 
 import { z } from 'zod';
+import { sql } from '@vercel/postgres';
+import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 
 // Validation schema with Zod
@@ -54,19 +56,39 @@ export async function createUser(prevState: State, formData: FormData) {
     };
   }
 
+  const { name, email, password, phone_number, street, city, state, zip_code, country } = validatedFields.data;
+
   // 3. Hash the password
-  // const hashedPassword = await bcrypt.hash(validatedFields.data.password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   // 4. Insert data into the database
   try {
-    // TODO: Use a transaction to insert into 'users' and then 'addresses'
-    // 1. INSERT into users table (name, email, hashedPassword, phone_number)
-    // 2. GET the new user's ID
-    // 3. INSERT into addresses table (user_id, street, city, etc.)
-    console.log('Data is valid. Ready to insert into DB:', validatedFields.data);
+    // Using a transaction to ensure both user and address are created successfully.
+    await sql.query('BEGIN');
+    
+    const userResult = await sql`
+      INSERT INTO users (name, email, password, phone_number)
+      VALUES (${name}, ${email}, ${hashedPassword}, ${phone_number})
+      RETURNING id;
+    `;
+    const newUserId = userResult.rows[0].id;
+
+    await sql`
+      INSERT INTO addresses (user_id, street, city, state, zip_code, country, is_default)
+      VALUES (${newUserId}, ${street}, ${city}, ${state}, ${zip_code}, ${country}, true);
+    `;
+
+    await sql.query('COMMIT');
+
   } catch (error) {
     // Handle database errors (e.g., unique email constraint)
-    return { message: 'Database Error: Failed to create user.' };
+    await sql.query('ROLLBACK');
+    // Check for unique email violation
+    if (error instanceof Error && error.message.includes('duplicate key value violates unique constraint')) {
+      return { message: 'An account with this email already exists.' };
+    }
+
+    return { message: 'Database Error: Failed to create user. Please try again.' };
   }
 
   // 5. Redirect to the login page on success
@@ -76,20 +98,22 @@ export async function createUser(prevState: State, formData: FormData) {
 // --- Login Action ---
 export type LoginState = string | undefined;
 
+import { signIn } from '@/auth'; // Make sure this path points to your auth.ts file
+import { AuthError } from 'next-auth';
+
 export async function authenticate(
   prevState: LoginState,
   formData: FormData,
 ) {
   try {
-    console.log('Attempting to authenticate user with email:', formData.get('email'));
-    // TODO: Add actual authentication logic here (e.g., with NextAuth.js)
-    // For now, we'll simulate a successful login.
-    // In a real app, you would redirect on success.
-    // redirect('/dashboard');
+    await signIn('credentials', formData);
   } catch (error) {
-    if (error instanceof Error && error.message.includes('CredentialsSignin')) {
-      return 'Invalid credentials.';
+    if (error instanceof AuthError) {
+      if (error.type === 'CredentialsSignin') {
+        return 'Invalid credentials.';
+      }
     }
-    return 'Something went wrong.';
+    // Re-throw other errors to be handled by Next.js
+    throw error;
   }
 }
