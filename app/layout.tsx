@@ -24,9 +24,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${merriweather.variable} ${lato.variable} min-h-screen bg-background font-sans text-text-main antialiased`}>
+      <body className={`${merriweather.variable} ${lato.variable} flex flex-col min-h-screen bg-background font-sans text-text-main antialiased`}>
         <Header />
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
