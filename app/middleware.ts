@@ -5,7 +5,6 @@ export default NextAuth(authConfig).auth;
 
 export const config = {
   // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-  /* Match all request paths except for the ones starting with: api, _next/static, _next/image, or files with an extension (e.g. .ico) */
-  // matcher: ['/((?!api|_next/static|_next/image|.*\\..*).*)']
-    matcher: ['/dashboard/:path*'],
+  // Protege todas as rotas, exceto a página inicial, login, registro e arquivos estáticos.
+  matcher: ['/((?!login|register|api|_next/static|_next/image|.*\\.png$).*)'],
 };
