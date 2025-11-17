@@ -2,8 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { ShoppingCart, User } from 'lucide-react';
+import { auth } from '@/auth';
 
-const Header = () => {
+const Header = async () => {
+  const session = await auth();
+
   return (
     <header className="py-6">
       <div className="container mx-auto max-w-6xl px-4">
@@ -28,9 +31,15 @@ const Header = () => {
                 0
               </span>
             </button>
-            <Link href="/login" aria-label="Account">
-              <User className="h-6 w-6 text-text-main" />
-            </Link>
+            {session?.user ? (
+              <button aria-label="My Account">
+                <User className="h-6 w-6 text-text-main" />
+              </button>
+            ) : (
+              <Link href="/login" aria-label="Login">
+                <User className="h-6 w-6 text-text-main" />
+              </Link>
+            )}
           </div>
         </div>
         <nav className="mt-4 flex justify-center gap-10">
