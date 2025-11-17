@@ -1,5 +1,9 @@
+import React from 'react';
 import { Merriweather, Lato } from 'next/font/google';
-import '@/app/ui/global.css';
+import './ui/globals.css';
+
+import Header from '@/app/components/header/Header';
+import Footer from '@/app/components/footer/Footer';
 
 const merriweather = Merriweather({
   subsets: ['latin'],
@@ -20,7 +24,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${merriweather.variable} ${lato.variable} font-sans antialiased`}>{children}</body>
+      <body className={`${merriweather.variable} ${lato.variable} min-h-screen bg-background font-sans text-text-main antialiased`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

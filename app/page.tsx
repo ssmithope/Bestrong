@@ -1,15 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import {
-  ShoppingCart,
-  User,
-  Star,
-  Twitter,
-  Facebook,
-  Instagram,
-} from 'lucide-react';
 
-// Dados dos produtos (mesmos de antes)
 const products = [
   {
     id: 1,
@@ -33,47 +24,8 @@ const products = [
 
 export default function Page() {
   return (
-    // Aplicando a fonte 'sans' (Lato) e cores base
-    <div className="min-h-screen bg-background font-sans text-text-main">
-      <div className="container mx-auto max-w-6xl px-4">
-        {/* === HEADER & NAVIGATION === */}
-        <header className="py-6">
-          <div className="flex items-center justify-between border-b border-ui-border pb-4">
-            {/* Fonte 'serif' (Merriweather) para o título */}
-            <h1 className="font-serif text-3xl font-bold text-text-main">
-              Handcrafted Haven
-            </h1>
-            <div className="flex items-center gap-5">
-              <button className="relative" aria-label="Cart">
-                <ShoppingCart className="h-6 w-6 text-text-main" />
-                {/* Cor 'primary' para o acento do carrinho */}
-                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
-                  0
-                </span>
-              </button>
-              <button aria-label="Account">
-                <User className="h-6 w-6 text-text-main" />
-              </button>
-            </div>
-          </div>
-          <nav className="mt-4 flex justify-center gap-10">
-            <a
-              href="#"
-              className="border-b-2 border-text-main pb-1 font-semibold text-text-main"
-            >
-              Explore
-            </a>
-            {/* Cor 'secondary' para links inativos */}
-            <a href="#" className="text-secondary hover:text-text-main">
-              Sell
-            </a>
-            <a href="#" className="text-secondary hover:text-text-main">
-              Community
-            </a>
-          </nav>
-        </header>
-
-        <main className="pb-16">
+    <div className="container mx-auto max-w-6xl px-4">
+      <main className="pb-16">
           {/* === HERO SECTION === */}
           <section className="py-20 text-center">
             {/* Fonte 'serif' (Merriweather) para o título principal */}
@@ -128,38 +80,7 @@ export default function Page() {
               ))}
             </div>
           </section>
-        </main>
-      </div>
-
-      {/* === FOOTER === */}
-      {/* Cor 'ui-border' (Beige/Sand) para o fundo do rodapé */}
-      <footer className="mt-16 bg-ui-border py-10">
-        <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 text-center md:flex-row md:text-left">
-          <div className="flex gap-6">
-            <a href="#" className="font-medium text-text-main hover:underline">
-              About Us
-            </a>
-            <a href="#" className="font-medium text-text-main hover:underline">
-              Contact
-            </a>
-          </div>
-          {/* Texto de copyright com opacidade */}
-          <div className="text-sm text-text-main/70">
-            <p>© 2024 Handcrafted Haven. All rights reserved.</p>
-          </div>
-          <div className="flex gap-5">
-            <a href="#" aria-label="Twitter">
-              <Twitter className="h-6 w-6 text-text-main hover:text-primary" />
-            </a>
-            <a href="#" aria-label="Facebook">
-              <Facebook className="h-6 w-6 text-text-main hover:text-primary" />
-            </a>
-            <a href="#" aria-label="Instagram">
-              <Instagram className="h-6 w-6 text-text-main hover:text-primary" />
-            </a>
-          </div>
-        </div>
-      </footer>
+      </main>
     </div>
   );
 }
