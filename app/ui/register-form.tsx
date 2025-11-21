@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { createUser, State } from '@/app/lib/actions';
 import {
   User,
@@ -29,9 +29,9 @@ function RegisterButton() {
   );
 }
 
-const RegisterForm = () => {
+export default function RegisterForm() {
   const initialState: State = { message: null, errors: {} };
-  const [state, dispatch] = useFormState(createUser, initialState);
+  const [state, dispatch] = React.useActionState(createUser, initialState);
 
   return (
     <>
@@ -151,5 +151,3 @@ const RegisterForm = () => {
     </>
   );
 };
-
-export default RegisterForm;

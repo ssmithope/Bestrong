@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 import { AtSign, KeyRound, AlertCircle } from 'lucide-react';
 import React from 'react';
+import { useSearchParams } from 'next/navigation';
 
 function LoginButton() {
   const { pending } = useFormStatus();
@@ -22,7 +23,9 @@ function LoginButton() {
 }
 
 export default function LoginForm() {
-  const [errorMessage, formAction] = useFormState(authenticate, undefined);
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
+  const [errorMessage, formAction] = React.useActionState(authenticate, undefined);
 
   return (
     <>
@@ -96,6 +99,7 @@ export default function LoginForm() {
           )}
         </div>
 
+        <input type="hidden" name="redirectTo" value={callbackUrl} />
         <LoginButton />
       </form>
     </>
